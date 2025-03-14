@@ -15,6 +15,18 @@ public class Client {
         return borrowedBook;
     }
     
-    
+    public void borrowedBook(Book book){
+        if (book != null && !book.isBorrowed()){
+            borrowedBook = book;
+            book.borrow();
+        }
+    }
+
+    public void returnBook(){
+        if (borrowedBook != null){
+            borrowedBook.returnBook();
+            borrowedBook = null;
+        }
+    }
     
 }
