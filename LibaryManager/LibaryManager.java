@@ -14,6 +14,12 @@ public class LibaryManager {
       Book.addBook(books, "The Catcher in the Rye", "J.D Salinger", 1951);
     }
 
+    if (clients.isEmpty()){
+      Client.registerClient(clients, "Allice");
+      Client.registerClient(clients, "Bob");
+      Client.registerClient(clients, "Mark");
+    }
+
 
     while(true){
     System.out.println("\nAvailable comands: add, remove, find, list, list_client, register, count, borrowed, exit");
@@ -21,6 +27,7 @@ public class LibaryManager {
 
     switch(command){
     case "add":
+      
       System.out.println("Enter book name: ");
       String name = scanner.nextLine();
       System.out.println("Enter book author: ");
@@ -29,12 +36,16 @@ public class LibaryManager {
       int year = Integer.parseInt(scanner.nextLine());
       Book.addBook(books, name, author, year);
       break;
+    
     case "remove":
+      
       System.out.println("Enter book name to remove: ");
       name = scanner.nextLine();
       Book.removeBook(books, name);
       break;
+    
     case "find":
+      
       System.out.println("Enter book name to find");
       name = scanner.nextLine();
       Book foundBook = Book.findBook(books, name);
@@ -44,10 +55,35 @@ public class LibaryManager {
         System.out.println("Book not found");
       }
       break;
+    
     case "list":
+      
       Book.listBooks(books);
       break;
+
+    case "list_client":
+      
+      Client.listClients(clients);
+      break;
+    
+    case "register":
+      
+      System.out.println("Enter client name: ");
+      String clientName = scanner.nextLine();
+      Client.registerClient(clients, clientName);
+      break;
+
+    case "count":
+      
+      Book.countBooks(books);
+      break;
+    
+    case "borrowed":
+      Book.countBorrowedBook(books);
+      break;
+
     case "exit":
+      
       System.out.println("Exiting...");
       return;
 

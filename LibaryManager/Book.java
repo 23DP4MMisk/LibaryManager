@@ -29,6 +29,11 @@ public class Book {
         return this.busy;
     }
 
+    public void setBorrowed(boolean borrowed){
+        this.busy = borrowed; 
+    }
+    
+    
     public void borrow(){
         this.busy = true;
     }
