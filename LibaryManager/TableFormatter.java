@@ -10,7 +10,7 @@ public class TableFormatter {
     private static final String ROW_COLOR = "\033[0;32m"; // Zaļš
     private static final String BORROWED_COLOR = "\033[0;31m"; // Sarkans (ja grāmata ir aizņemta)
 
-    // Метод для вывода таблицы книг
+    // Metods printet book tabulu
     public static void printBooksTable(List<Book> books) {
         System.out.println(HEADER_COLOR + "----------------------------------------------------------------------------" + RESET);
         System.out.printf(HEADER_COLOR + "| %-30s | %-20s | %-5s | %-8s |%n", "Title", "Author", "Year", "Borrowed");
