@@ -1,94 +1,30 @@
-
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class LibaryManager {
-  public static void main(String[] args) throws Exception {
-    Scanner scanner = new Scanner(System.in);
-    List<Book> books = new ArrayList<>();
-    List<Client> clients = new ArrayList<>();
+    public static void main(String[] args) throws Exception {
+        System.out.println("Hello, World!");
+        Scanner scanner = new Scanner(System.in);
+        
+        InitialDataLoader.loadInitialData();
 
-    if(books.isEmpty()){
-      Book.addBook(books, "1984", "George Orwell", 1949);
-      Book.addBook(books, "To Kill a Nockingbird", "Harper Lee", 1960);
-      Book.addBook(books, "The Catcher in the Rye", "J.D Salinger", 1951);
+        
+        
+        List<Book> books = CSVHandler.loadBooksFromCSV();
+        List<Client> clients = CSVHandler.loadClientsFromCSV();
+
+        ASCIIAnimation.printWelcomeMessage();
+
+        while (true) {
+            System.out.println("\nAvailable commands:");
+            CommandPrinter.printCommands();
+
+            System.out.print("\n" + ColorScheme.COMMAND_COLOR + " Enter command: " + ColorScheme.RESET + " ");
+            String command = scanner.nextLine().trim().toLowerCase();
+
+            CommandExecutor.executeCommand(command, scanner, books, clients);
+        }
     }
-
-    if (clients.isEmpty()){
-      Client.registerClient(clients, "Allice");
-      Client.registerClient(clients, "Bob");
-      Client.registerClient(clients, "Mark");
-    }
-
-
-    while(true){
-    System.out.println("\nAvailable comands: add, remove, find, list, list_client, register, count, borrowed, exit");
-    String command = scanner.nextLine();
-
-    switch(command){
-    case "add":
-      
-      System.out.println("Enter book name: ");
-      String name = scanner.nextLine();
-      System.out.println("Enter book author: ");
-      String author = scanner.nextLine();
-      System.out.println("Enter book year");
-      int year = Integer.parseInt(scanner.nextLine());
-      Book.addBook(books, name, author, year);
-      break;
-    
-    case "remove":
-      
-      System.out.println("Enter book name to remove: ");
-      name = scanner.nextLine();
-      Book.removeBook(books, name);
-      break;
-    
-    case "find":
-      
-      System.out.println("Enter book name to find");
-      name = scanner.nextLine();
-      Book foundBook = Book.findBook(books, name);
-      if(foundBook != null){
-        System.out.println(foundBook);
-      }else {
-        System.out.println("Book not found");
-      }
-      break;
-    
-    case "list":
-      
-      Book.listBooks(books);
-      break;
-
-    case "list_client":
-      
-      Client.listClients(clients);
-      break;
-    
-    case "register":
-      
-      System.out.println("Enter client name: ");
-      String clientName = scanner.nextLine();
-      Client.registerClient(clients, clientName);
-      break;
-
-    case "count":
-      
-      Book.countBooks(books);
-      break;
-    
-    case "borrowed":
-      Book.countBorrowedBook(books);
-      break;
-
-    case "exit":
-      
-      System.out.println("Exiting...");
-      return;
-
-
-    }}
-       
-  }
 }
+

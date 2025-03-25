@@ -1,89 +1,118 @@
-import java.util.*;
+import java.util.List;
+
+import java.util.Comparator;
 
 public class Book {
-    private String name;
+    private String title;
     private String author;
     private int year;
-    private boolean busy;
+    private boolean isBorrowed;
 
-    public Book(String InitilazationName, String InitilazationAuthor, int Initilazationyear){
-        this.name = InitilazationName;
-        this.author = InitilazationAuthor;
-        this.year = Initilazationyear;
-        this.busy = false;
+    public Book(String title, String author, int year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isBorrowed = false;
     }
 
-    public String bookName(){
-        return this.name;
-    }
-
-    public String authorName(){
-        return this.author;
-    }
-
-    public int bookYear(){
-        return this.year;
-    }
-
-    public boolean isBorrowed(){
-        return this.busy;
-    }
-
-    public void setBorrowed(boolean borrowed){
-        this.busy = borrowed; 
+    public String getTitle(){ 
+        return title; 
     }
     
+    public String getAuthor(){ 
+        return author; 
+    }
     
-    public void borrow(){
-        this.busy = true;
+    public int getYear(){ 
+        return year; 
+    }
+    
+    public boolean isBorrowed(){ 
+        return isBorrowed; 
     }
 
-    public void returnBook(){
-        this.busy = false;
+    public void borrowBook() {
+        if (!isBorrowed) {
+            isBorrowed = true;
+            System.out.println("Book borrowed: " + title);
+        } else {
+            System.out.println("The book is already borrowed.");
+        }
+    }
+    
+    public void returnBook() {
+        if (isBorrowed) {
+            isBorrowed = false;
+            System.out.println("Book returned: " + title);
+        } else {
+            System.out.println("The book was not borrowed.");
+        }
     }
 
     @Override
     public String toString(){
-        return String.format("Title: %s, Author: %s, Year: %d, Borrowed: %b", this.name, this.author, this.year, this.busy);
+        return String.format("Title: %s, Author: %s, Year: %d, Borrowed: %b", title, author, year, isBorrowed);
     }
 
-    public static void addBook(List<Book> books, String InitilazationName, String InitilazationAuthor, int Initilazationyear){
-        books.add(new Book(InitilazationName, InitilazationAuthor, Initilazationyear));
+   
+    // Comparator for sorting books by year (oldest to newest)
+    public static Comparator<Book> sortByYearAsc = Comparator.comparingInt(Book::getYear);
+
+    // Comparator for sorting books by year (newest to oldest)
+    public static Comparator<Book> sortByYearDesc = (b1, b2) -> Integer.compare(b2.getYear(), b1.getYear());
+    
+   
+    // Method to add a new book to the list
+    public static void addBook(List<Book> books, String title, String author, int year) {
+     books.add(new Book(title, author, year));
     }
 
-    public static void removeBook(List<Book> books, String InitilazationName){
-        books.removeIf(book -> book.bookName().equalsIgnoreCase(InitilazationName));
+   // Method to remove a book by title
+    public static void removeBook(List<Book> books, String title) {
+      books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
     }
 
-    public static Book findBook(List<Book> books, String InitilazationName){
+   // Method to find a book by title
+   public static Book findBookByTitle(List<Book> books, String title) {
         return books.stream()
-        .filter(book -> book.bookName().equalsIgnoreCase(InitilazationName))
+        .filter(book -> book.getTitle().equalsIgnoreCase(title))
         .findFirst()
         .orElse(null);
-
     }
 
-    public static void listBooks(List<Book> books){
-       
-        
-        
-        
-        System.out.println("\n==============================================================");
-        System.out.println("       Author     |       Book name           |     Book year ");
-        System.out.println("===============================================================");
-        books.forEach(book -> {
-            System.out.printf("%-20s | %-30s | %-4d%n", book.authorName(), book.bookName(), book.bookYear());
-        });
+   // Method to list all books
+   public static void listBooks(List<Book> books) {
+      books.forEach(System.out::println);
     }
 
-    public static void countBooks(List<Book> books){
-        System.out.println("Vispar gramatu biblioteka: " + books.size());
+   // Method to count total number of books
+    public static void countBooks(List<Book> books) {
+    System.out.println("Total books: " + books.size());
     }
 
-    public static void countBorrowedBook(List<Book>books){
-        long count = books.stream().filter(Book::isBorrowed).count();
-        System.out.println("Gramatas aizņemtas skaits: " + count);
-    }
-
+   
     
+
+  
+
+    public static void countBorrowedBooks(List<Book> books) {
+        long count = books.stream().filter(Book::isBorrowed).count();
+        System.out.println(ColorScheme.TABLE_HEADER_COLOR + " Borrowed books: " + count + ColorScheme.TABLE_RESET);
+
+
+    }
+
+    // Method to sort books by year ascending
+    public static void sortBooksByYearAsc(List<Book> books) {
+        books.sort(Book.sortByYearAsc);
+        listBooks(books);
+    }
+
+    // Method to sort books by year descending
+    public static void sortBooksByYearDesc(List<Book> books) {
+        books.sort(Book.sortByYearDesc);
+        listBooks(books);
+    }
+
+   
 }
