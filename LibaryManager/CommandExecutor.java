@@ -142,6 +142,7 @@ public class CommandExecutor {
         Book book = Book.findBookByTitle(books, bookTitle);
         if (book != null) {
             client.returnBook(book);
+            CSVHandler.saveClientsToCSV(clients);
         } else {
             System.out.println("Book not found.");
         }
