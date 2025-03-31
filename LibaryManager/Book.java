@@ -69,7 +69,13 @@ public class Book {
 
    // Method to remove a book by title
     public static void removeBook(List<Book> books, String title) {
-      books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        boolean removed = books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        if (removed) {
+          CSVHandler.updateBooksCSV(books);  // Updating CSV
+          System.out.println("Book \"" + title + "\" delete.");
+        } else {
+          System.out.println("Book \"" + title + "\" dont found.");
+        }
     }
 
    // Method to find a book by title

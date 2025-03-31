@@ -7,12 +7,14 @@ public class LibaryManager {
         System.out.println("Hello, World!");
         Scanner scanner = new Scanner(System.in);
         
+        // Notiek datu ielāde
         InitialDataLoader.loadInitialData();
 
-        
-        
-        List<Book> books = CSVHandler.loadBooksFromCSV();
-        List<Client> clients = CSVHandler.loadClientsFromCSV();
+        // Mēs saņemam lejupielādētās grāmatas un klientus
+        List<Book> books = InitialDataLoader.getBooks();
+        List<Client> clients = InitialDataLoader.getClients();
+
+       
 
         ASCIIAnimation.printWelcomeMessage();
 

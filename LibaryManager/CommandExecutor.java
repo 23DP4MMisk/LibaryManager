@@ -123,6 +123,7 @@ public class CommandExecutor {
         Book book = Book.findBookByTitle(books, bookTitle);
         if (book != null) {
             client.borrowBook(book);
+            CSVHandler.saveBorrowedBook(clientName, bookTitle);
         } else {
             System.out.println("Book not found.");
         }
@@ -143,6 +144,7 @@ public class CommandExecutor {
         if (book != null) {
             client.returnBook(book);
             CSVHandler.saveClientsToCSV(clients);
+            CSVHandler.removeBorrowedBook(clientName, bookTitle);
         } else {
             System.out.println("Book not found.");
         }
