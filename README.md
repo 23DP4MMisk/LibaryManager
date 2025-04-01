@@ -22,4 +22,10 @@ __Galvenas funkcijas:__
 
 4. __Mijiedarbība, izmantojot konsoli__
 
-# Funkcijas apraksts
+# Tirišanas funkcija:  
+// Command to clear all caches:  
+// In VSCode press "F1", then type a command: Clean Java Language Server Workspace
+
+# Lietotaja interfejsa apraksts  
+
+ 

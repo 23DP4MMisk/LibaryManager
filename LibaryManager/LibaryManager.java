@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 
 public class LibaryManager {
+
+    // Command to clear all caches:
+    // In VSCode press "F1", then type a command: Clean Java Language Server Workspace
+
+    
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
         Scanner scanner = new Scanner(System.in);
