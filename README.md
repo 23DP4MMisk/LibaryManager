@@ -21,3 +21,5 @@ __Galvenas funkcijas:__
 * Klientu saraksta parādīšana tabulas formātā
 
 4. __Mijiedarbība, izmantojot konsoli__
+
+# Funkcijas apraksts
