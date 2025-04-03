@@ -1,3 +1,5 @@
+package main;
+
 public class ColorScheme {
     public static final String COMMAND_COLOR = "\033[1;32m";  // Zaļā krāsa (izvēlēties jebkuru krāsu)
     public static final String RESET = "\033[0m";             // Atiestatīt krāsu

@@ -1,3 +1,5 @@
+package main;
+
 public class ASCIIAnimation {
     public static void printWelcomeMessage() {
         System.out.println("\033[1;34m"); // Синий цвет

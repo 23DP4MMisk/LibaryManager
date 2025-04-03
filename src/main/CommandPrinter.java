@@ -1,3 +1,5 @@
+package main;
+
 public class CommandPrinter {
     public static void printCommands() {
         System.out.printf("%-20s%-50s\n", ColorScheme.COMMAND_COLOR + "add" + ColorScheme.RESET, "- Add a new book");
