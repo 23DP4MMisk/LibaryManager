@@ -370,7 +370,7 @@ _Kā tas darbojas:_
         - Noņem aizņemto grāmatu no klienta saraksta, izmantojot `CSVHandler.removeBorrowedBook`.  
 
 12. `EXIT – Iziet no programmas`  
- 
+
     _Kā tas darbojas:_  
     - Iziet no programmas.  
     __Ka tas ir realizets koda__  
@@ -390,7 +390,7 @@ _Kā tas darbojas:_
   
 
 # Funkcijas apraksti  
-Izmantojot programmu, ir pieejamas šādas komandas. Ievadiet nepieciešamo komandu un nospiediet `Enter`. Komandas var ievadīt jebkurā reģistrā.  
+
 > Izmantojot programmu, ir pieejamas šādas komandas. Ievadiet nepieciešamo komandu un nospiediet Enter. Komandas var ievadīt jebkurā reģistrā.  
 
 ` Pamatkomandas: `  
