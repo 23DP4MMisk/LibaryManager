@@ -369,7 +369,8 @@ _Kā tas darbojas:_
         - Saglabā atjaunoto klientu datus CSV failā, izmantojot `CSVHandler.saveClientsToCSV`.  
         - Noņem aizņemto grāmatu no klienta saraksta, izmantojot `CSVHandler.removeBorrowedBook`.  
 
-12. `EXIT – Iziet no programmas` 
+12. `EXIT – Iziet no programmas`  
+ 
     _Kā tas darbojas:_  
     - Iziet no programmas.  
     __Ka tas ir realizets koda__  
