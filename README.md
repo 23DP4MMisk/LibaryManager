@@ -384,6 +384,53 @@ _Kā tas darbojas:_
         - Pirms iziešanas no programmas tiek izvadīts ziņojums `"Goodbye!"` konsolē, lai lietotājs zinātu, ka programma beigs savu darbību.  
     2. __Programmas beigšana:__  
         - Izmanto `System.exit(0)` komandu, lai nekavējoties izbeigtu programmas izpildi. Parametrs `0` norāda, ka programma beidzas veiksmīgi (nav kļūdu).  
+
+  
+  
+
+# Funkcijas apraksti  
+Izmantojot programmu, ir pieejamas šādas komandas. Ievadiet nepieciešamo komandu un nospiediet `Enter`. Komandas var ievadīt jebkurā reģistrā.  
+> Izmantojot programmu, ir pieejamas šādas komandas. Ievadiet nepieciešamo komandu un nospiediet Enter. Komandas var ievadīt jebkurā reģistrā.  
+
+` Pamatkomandas: `  
+
+` ADD `  – grāmatas pievienošana    
+   - Ievadiet nosaukumu, autoru un izdošanas gadu.  
+   - Dati tiek saglabāti failā.  
+
+`REMOVE` – grāmatas dzēšana  
+   - Ievadiet grāmatas nosaukumu, kuru vēlaties izdzēst.  
+   - Ja dzēšana veiksmīga, parādīsies ziņojums: _Book "Nosaukums" deleted._  
+
+` FIND ` – grāmatas meklēšana  
+   - Ievadiet grāmatas nosaukumu.  
+   - Ja grāmata ir atrasta, tiks parādīts tās nosaukums, autors un izdošanas gads.  
+   - Ja nē, parādīsies ziņojums _Book not found._  
+
+
+`LIST – grāmatu saraksta attēlošana ||      
+list_client – klientu saraksta attēlošana  
+-> Dati tiek parādīti tabulas formātā.`  
+
+` COUNT ` – parāda kopējo grāmatu skaitu bibliotēkā.  
+  
+`SORT_ASC / SORT_DESC` – grāmatu kārtošana pēc izdošanas gada  
+   - __sort_asc__ – no vecākās līdz jaunākajai.  
+   - __sort_desc__ – no jaunākās līdz vecākajai.  
+   - Rezultāti tiek attēloti tabulā.  
+
+` BORROW `– grāmatas aizņemšanās  
+   - Ievadiet klienta vārdu un grāmatas nosaukumu.  
+   - Informācija par aizņemtajām grāmatām tiek saglabāta failā.  
+   > Klienta vārds un grāmata jābūt reģistrētiem sistēmā.  
+
+` RETURN ` – grāmatas atgriešana  
+   - Ievadiet klienta vārdu un atgriežamās grāmatas nosaukumu.  
+   - Informācija par aizņemto grāmatu tiek dzēsta no faila.  
+
+` EXIT ` – iziešana no programmas.   
+ 
+
   
         
     
