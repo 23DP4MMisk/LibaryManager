@@ -5,7 +5,7 @@ __Merķis__:
 
 Bibliotēkas sistēmas izveide konsolei, kas ļauj pievienot, dzēst grāmatas, izsekot, kuras grāmatas paņēmuši klienti un reģistrēt jaunus klientus  
 
-__Galvenas funkcijas:__
+`Galvenas funkcijas:`
 1. __Grāmatu pārvaldība__
 * Pievienot gramatu
 * Dzest gramatu
@@ -27,11 +27,11 @@ __Galvenas funkcijas:__
 // In VSCode press "F1", then type a command: Clean Java Language Server Workspace
 
 # Lietotaja interfejsa apraksts   
-__Sākums:__   
+`Sākums:`   
 Pašā sākumā tiek parādīts uzraksts __LIBARY MANAGER__, kas tika izveidots, pateicoties ASCII Animation.  
 Pēc tam jūs varat redzēt 8 komandas, kuras var veikt šajā programma, un ir īss apraksts katrai komandai.   
 __Īss apraksts un to paskaidrojums katrai komandai:__    
-1. __ADD__ - Pievienot jaunu grāmatu  
+1. `ADD - Pievienot jaunu grāmatu `   
       _Kā tas darbojas:_  
       - Pieprasa lietotājam grāmatas nosaukumu, autoru un izdošanas gadu.  
       - Izveido objektu __Book.__  
@@ -55,7 +55,7 @@ __Īss apraksts un to paskaidrojums katrai komandai:__
     __Nosaukums__, __Autors__, __Gads__, __Vai aizņemta__.  
     - Ja fails neeksistē, tas tiek izveidots.  
       
-2. __REMOVE__ - Dzēst grāmatu  
+2. `REMOVE - Dzēst grāmatu`  
     _Kā tas darbojas:_  
     - Pieorasa lietotājam grāmatas nosaukumu.  
     - Meklē to __book.csv__ failā.  
@@ -78,7 +78,7 @@ __Īss apraksts un to paskaidrojums katrai komandai:__
    - Tiek filtrētas tās, kas neatbilst dzēšamajai grāmatai.  
    - Fails tiek pārrakstīts bez izdzēstās grāmatas.
 
-3. __FIND__ – Atrast grāmatu  
+3. `FIND – Atrast grāmatu`  
 _Kā tas darbojas:_  
     - Pieprasa grāmatas nosaukumu.  
     - Meklē to sarakstā un, ja atrod, izvada informāciju.  
@@ -93,16 +93,16 @@ _Kā tas darbojas:_
     ```  
     __Loģika:__  
     1. _Filtrēšana (filter)_  
-        - __Metode:__ .filter(book -> book.getTitle().equalsIgnoreCase(title))  
-        - __Darbība:__ Iziet cauri visām sarakstā esošajām grāmatām (books) un atstāj tikai tās, kuru nosaukums (getTitle()) sakrīt ar meklēto (title), ignorējot lielos un mazos burtus (equalsIgnoreCase).  
+        - __Metode:__ .`filter(book -> book.getTitle().equalsIgnoreCase(title))`  
+        - __Darbība:__ Iziet cauri visām sarakstā esošajām grāmatām `(books)` un atstāj tikai tās, kuru nosaukums `(getTitle())` sakrīt ar meklēto `(title),` ignorējot lielos un mazos burtus `(equalsIgnoreCase).`  
     2. _Pirmā atrastā grāmata (findFirst)_  
-       - __Metode:__ .findFirst()  
+       - __Metode:__ `.findFirst() ` 
        - __Darbība:__ Ja sarakstā ir vairākas grāmatas ar tādu pašu nosaukumu, __atgriež tikai pirmo atrasto.__  
     3. _Rezultāts (orElse(null))_  
-       - __Metode:__ .orElse(null)  
+       - __Metode:__ `.orElse(null) ` 
        - __Darbība:__ Ja sarakstā nav nevienas atbilstošas grāmatas, __atgriež__  null, lai norādītu, ka tāda grāmata nav atrasta.  
 
-4. __LIST__ – Parādīt visas grāmatas  
+4. `LIST – Parādīt visas grāmatas`  
     _Kā tas darbojas:_  
     - Ielādē grāmatas no books.csv.  
     - Izvada tās konsolē.  
@@ -147,7 +147,7 @@ _Kā tas darbojas:_
      - __Izveido Book objektu__ un, ja nepieciešams, atzīmē to kā aizņemtu.  
      - __Ja dati nederīgi__, izvada kļūdas ziņojumu, beigās atgriež sarakstu ar grāmatām.  
 
-5. __LIST_CLIENT__ – Parādīt visus klientus  
+5. `LIST_CLIENT – Parādīt visus klientus`  
     _Ka tas darbojas_  
     - Izvada visus reģistrētos klientus tabula formata.  
     __Ka ir realizets koda:__  
@@ -197,9 +197,9 @@ _Kā tas darbojas:_
     ```  
     __Loģika:__  
     1. __Tabulas formatēšana::__  
-       - Inicializējam maksimālos garumus klienta vārdiem un aizņemto grāmatu sarakstiem: maxClientNameLength un maxBooksLength.  
+       - Inicializējam maksimālos garumus klienta vārdiem un aizņemto grāmatu sarakstiem: `maxClientNameLength` un `maxBooksLength`.  
     2. __Maksimālā garuma aprēķins:__  
-       - Ar ciklu pārbaudām katra klienta vārdu garumu un atjaunojam maxClientNameLength.  
+       - Ar ciklu pārbaudām katra klienta vārdu garumu un atjaunojam `maxClientNameLength`.  
        - Pārbaudām katra klienta aizņemto grāmatu sarakstu un atjaunojam maxBooksLength, lai nodrošinātu, ka viss teksts labi ietilpst tabulā.  
     3. __Tabulas formāta izveide:__  
         - Izveidojam formātu galvenajai tabulai (headerFormat), ņemot vērā maksimālos garumus.  
@@ -209,11 +209,11 @@ _Kā tas darbojas:_
         - Izdrukājam atdalītāju.  
     5. __Klientu datu izvadīšana:__  
         - Klientus šķirojam un izvadām katra klienta vārdu un aizņemto grāmatu sarakstu tabulā.   
-        - Ja klientam nav aizņemtu grāmatu, tiek parādīts "None".  
+        - Ja klientam nav aizņemtu grāmatu, tiek parādīts `"None"`.  
         - Tabulas beigās izdrukājam atdalītāju.  
 
 
-6. __REGISTER__ – Reģistrēt jaunu klientu  
+6. `REGISTER – Reģistrēt jaunu klientu`  
     _Kā tas darbojas:_  
     - Pieprasa lietotājam ievadīt klienta vārdu
     - Reģistrē jaunu klientu CSV faila.  
@@ -228,15 +228,15 @@ _Kā tas darbojas:_
     ```  
     __Loģika:__  
    1. __Klienta vārda ievade:__  
-       - Programma pieprasa lietotājam ievadīt klienta vārdu ar System.out.print("Enter client name: ").  
+       - Programma pieprasa lietotājam ievadīt klienta vārdu ar `System.out.print("Enter client name: ")`.  
        - Vārds tiek saglabāts mainīgajā name ar scanner.nextLine().
    2. __Klienta reģistrēšana:__  
-        - Izsauc Client.registerClient(clients, name) metodi, lai pievienotu jauno klientu sarakstam clients, izmantojot ievadīto vārdu.
+        - Izsauc `Client.registerClient(clients, name) metodi`, lai pievienotu jauno klientu sarakstam clients, izmantojot ievadīto vārdu.
    3. __Datu saglabāšana CSV failā:__  
-        - Izsauc CSVHandler.saveClientsToCSV(clients), lai saglabātu atjaunināto klientu sarakstu CSV failā.  
+        - Izsauc `CSVHandler.saveClientsToCSV(clients)`, lai saglabātu atjaunināto klientu sarakstu CSV failā.  
 
 
-7. __COUNT__ – Skaitīt grāmatas  
+7. `COUNT – Skaitīt grāmatas`  
     _Kā tas darbojas:_  
     - Izvada kopējo grāmatu skaitu sistēmā.  
     __Ka ir realizets koda__  
@@ -248,14 +248,14 @@ _Kā tas darbojas:_
     ```  
     __Loģika__  
     1. __Filtrē grāmatas:__  
-        - Programma izmanto books.stream() lai izveidotu straumi no grāmatām.  
-        - Tiek izmantota filter(Book::isBorrowed), lai atlasītu tikai tās grāmatas, kuru status ir "aizņemta" (t.i., isBorrowed() atgriež true).
+        - Programma izmanto `books.stream()` lai izveidotu straumi no grāmatām.  
+        - Tiek izmantota `filter(Book::isBorrowed)`, lai atlasītu tikai tās grāmatas, kuru status ir "aizņemta" `(t.i., isBorrowed() atgriež true)`.
     2. __Skaitīšana:__  
-        - Ar count() tiek saskaitītas grāmatas, kas atbilst filtrēšanas kritērijiem (tās, kas ir aizņemtas).  
+        - Ar `count()` tiek saskaitītas grāmatas, kas atbilst filtrēšanas kritērijiem (tās, kas ir aizņemtas).  
     3. __Izvade:__  
         - Pēc tam tiek izdrukāts aizņemtās grāmatas skaits ar krāsu iestatījumiem no ColorScheme.TABLE_HEADER_COLOR un ColorScheme.TABLE_RESET.  
 
-8. __SORT_ASC__ – Kārtot grāmatas pēc gada (pieaugošā secībā)  
+8. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada pieaugošā secībā.  
     __Ka ir realizets koda__  
@@ -267,12 +267,12 @@ _Kā tas darbojas:_
     ```  
     __Loģika__  
     1. __Kārtot grāmatas:__  
-        - Programma izmanto books.sort(Book.sortByYearAsc) metodi, kas kārtos grāmatas sarakstā pēc to izdošanas gada augošā secībā. 
-        - Book.sortByYearAsc ir salīdzināšanas funkcija, kas salīdzina grāmatas pēc gada, nodrošinot, ka vecākās grāmatas būs saraksta sākumā.
+        - Programma izmanto `books.sort(Book.sortByYearAsc)` metodi, kas kārtos grāmatas sarakstā pēc to izdošanas gada augošā secībā. 
+        - `Book.sortByYearAsc` ir salīdzināšanas funkcija, kas salīdzina grāmatas pēc gada, nodrošinot, ka vecākās grāmatas būs saraksta sākumā.
     2. __Grāmatu parādīšana:__  
-        - Pēc grāmatu kārtošanas tiek izsaukta listBooks(books) metode, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
+        - Pēc grāmatu kārtošanas tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-9. __SORT_DESC__ – Kārtot grāmatas pēc gada (dilstošā secībā)  
+9. `SORT_DESC – Kārtot grāmatas pēc gada (dilstošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada dilstošā secībā.  
     __Ka ir realizets koda__  
@@ -285,12 +285,12 @@ _Kā tas darbojas:_
     ```  
     __Loģika__  
     1. __Kārtot grāmatas:__  
-        - Programma izmanto books.sort(Book.sortByYearDesc) metodi, kas kārtos grāmatas sarakstā pēc to izdošanas gada dilstošā secībā.
-        - Book.sortByYearDesc ir salīdzināšanas funkcija, kas salīdzina grāmatas pēc gada, nodrošinot, ka jaunākās grāmatas būs saraksta sākumā.
+        - Programma izmanto `books.sort(Book.sortByYearDesc) metodi`, kas kārtos grāmatas sarakstā pēc to izdošanas gada dilstošā secībā.
+        - `Book.sortByYearDesc` ir salīdzināšanas funkcija, kas salīdzina grāmatas pēc gada, nodrošinot, ka jaunākās grāmatas būs saraksta sākumā.
     2. __Grāmatu parādīšana:__  
-        - Pēc grāmatu kārtošanas, tiek izsaukta listBooks(books) metode, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
+        - Pēc grāmatu kārtošanas, tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-10. __BORROW__ – Paņemt grāmatu no bibliotekas   
+10. `BORROW – Paņemt grāmatu no bibliotekas`   
     _Kā tas darbojas:_  
     - Pieprasa lietotājam ievadīt grāmatas nosaukumu, kuru viņš vēlas aizņemt.  
     - Atzīmē grāmatu kā aizņemtu.  
@@ -319,15 +319,15 @@ _Kā tas darbojas:_
     __Loģika__  
     1. __Klienta meklēšana:__  
         - Programma pieprasa lietotājam ievadīt klienta vārdu.  
-        - Tiek meklēts klients ar šo vārdu sarakstā, izmantojot Client.findClientByName metodi. Ja klients nav atrasts, tiek izvadīts ziņojums "Client not found." un metode tiek pārtraukta.
+        - Tiek meklēts klients ar šo vārdu sarakstā, izmantojot `Client.findClientByName metodi`. Ja klients nav atrasts, tiek izvadīts ziņojums "Client not found." un metode tiek pārtraukta.
     2. __Grāmatas meklēšana:__  
         - Pēc tam, kad klients ir atrasts, programma pieprasa ievadīt grāmatas nosaukumu.  
-        - Grāmata tiek meklēta sarakstā, izmantojot Book.findBookByTitle metodi. Ja grāmata netiek atrasta, tiek izvadīts ziņojums "Book not found." un metode tiek pārtraukta.
+        - Grāmata tiek meklēta sarakstā, izmantojot `Book.findBookByTitle metodi.` Ja grāmata netiek atrasta, tiek izvadīts ziņojums "Book not found." un metode tiek pārtraukta.
     3. __Grāmatas aizņemšana:__  
-        - Ja gan klients, gan grāmata ir atrasti, programma atzīmē grāmatu kā aizņemtu, izmantojot klienta metodi borrowBook, un veic atjauninājumus:  
-        - Grāmatas aizņemšanas informācija tiek saglabāta ar CSVHandler.saveBorrowedBook.  
+        - Ja gan klients, gan grāmata ir atrasti, programma atzīmē grāmatu kā aizņemtu, izmantojot `klienta metodi borrowBook`, un veic atjauninājumus:  
+        - Grāmatas aizņemšanas informācija tiek saglabāta ar `CSVHandler.saveBorrowedBook`.  
 
-11. __RETURN__ – Atgriezt aizņemto grāmatu  
+11. `RETURN – Atgriezt aizņemto grāmatu`  
     _Kā tas darbojas:_  
     - Pieprasa ievadit klientu vardu kurš aizņem gramatu un grīb atgriezt gramatu biblioteka
     - Pieprasa lietotājam ievadīt grāmatas nosaukumu, kuru viņš vēlas atgriezt.  
@@ -358,18 +358,18 @@ _Kā tas darbojas:_
     __Loģika__  
     1. __Klienta meklēšana:__  
         - Pieprasa ievadīt klienta vārdu.  
-        - Meklē klientu sarakstā, izmantojot metodi Client.findClientByName.  
+        - Meklē klientu sarakstā, izmantojot `metodi Client.findClientByName.`  
         - Ja klients netiek atrasts, izvada ziņojumu "Client not found." un iznāk no metodes.
     2. __Grāmatas meklēšana:__  
         - Pieprasa ievadīt grāmatas nosaukumu.  
-        - Meklē grāmatu sarakstā, izmantojot metodi Book.findBookByTitle.  
+        - Meklē grāmatu sarakstā, izmantojot `metodi Book.findBookByTitle.`  
         - Ja grāmata netiek atrasta, izvada ziņojumu "Book not found."  
     3. __Grāmatas atgriešana:__  
-        - Ja gan klients, gan grāmata ir atrasti, tiek izsaukta klienta metode returnBook, kas veic grāmatas atgriešanu.  
-        - Saglabā atjaunoto klientu datus CSV failā, izmantojot CSVHandler.saveClientsToCSV.  
-        - Noņem aizņemto grāmatu no klienta saraksta, izmantojot CSVHandler.removeBorrowedBook.  
+        - Ja gan klients, gan grāmata ir atrasti, tiek izsaukta `klienta metode returnBook`, kas veic grāmatas atgriešanu.  
+        - Saglabā atjaunoto klientu datus CSV failā, izmantojot `CSVHandler.saveClientsToCSV`.  
+        - Noņem aizņemto grāmatu no klienta saraksta, izmantojot `CSVHandler.removeBorrowedBook`.  
 
-12. __EXIT__ – Iziet no programmas 
+12. `EXIT – Iziet no programmas` 
     _Kā tas darbojas:_  
     - Iziet no programmas.  
     __Ka tas ir realizets koda__  
@@ -381,9 +381,9 @@ _Kā tas darbojas:_
     ```  
     __Loģika__  
     1. __Ziņojuma izvadīšana:__  
-        - Pirms iziešanas no programmas tiek izvadīts ziņojums __"Goodbye!"__ konsolē, lai lietotājs zinātu, ka programma beigs savu darbību.  
+        - Pirms iziešanas no programmas tiek izvadīts ziņojums `"Goodbye!"` konsolē, lai lietotājs zinātu, ka programma beigs savu darbību.  
     2. __Programmas beigšana:__  
-        - Izmanto __System.exit(0)__ komandu, lai nekavējoties izbeigtu programmas izpildi. Parametrs __0__ norāda, ka programma beidzas veiksmīgi (nav kļūdu).  
+        - Izmanto `System.exit(0)` komandu, lai nekavējoties izbeigtu programmas izpildi. Parametrs `0` norāda, ka programma beidzas veiksmīgi (nav kļūdu).  
   
         
     
