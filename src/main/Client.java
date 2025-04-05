@@ -20,6 +20,14 @@ public class Client {
         return borrowedBooks; 
     }
 
+    // Metods lai neparadas teksts kadu gramatu paņem no bibliotekas
+    public void borrowSilently(Book book) {
+        if (!borrowedBooks.contains(book)) {
+            borrowedBooks.add(book);
+            book.borrowSilently(); 
+        }
+    }
+
     
     public void borrowBook(Book book) {
         if (!book.isBorrowed()) {
