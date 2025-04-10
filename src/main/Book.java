@@ -33,6 +33,14 @@ public class Book {
         return isBorrowed; 
     }
 
+    public void borrowSilently() {
+        if (!isBorrowed) {
+            isBorrowed = true;
+        }
+    }
+    
+    
+    
     public void borrowBook() {
         if (!isBorrowed) {
             isBorrowed = true;

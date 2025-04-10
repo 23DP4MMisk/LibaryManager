@@ -65,8 +65,8 @@ public class InitialDataLoader {
                   for (String bookTitle : entry.getValue()) {
                       Book book = Book.findBookByTitle(books, bookTitle);
                       if (book != null) {
-                          client.borrowBook(book); // Grāmatas pievienošana klientam
-                          book.borrowBook(); // Atzīmējiet grāmatu kā uzņemtu
+                          client.borrowSilently(book); // Grāmatas pievienošana klientam
+                          book.borrowSilently(); // Atzīmējiet grāmatu kā uzņemtu
                          
                     }
                 }

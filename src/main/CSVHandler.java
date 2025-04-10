@@ -35,19 +35,19 @@ public class CSVHandler {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(","); // Sadaliet virkni ar komatu
-            if (data.length >= 4) { // Проверка на достаточность данных
+            if (data.length >= 4) { // Pārbauda datu pietiekamību
                 try {
-                    // Преобразуем год в число
+                    // Gada pārvēršana skaitļos
                     int year = Integer.parseInt(data[2]);
-                    // Преобразуем статус книги в boolean
+                    // Pārvērtiet grāmatas statusu uz Būla vērtību
                     boolean isBorrowed = Boolean.parseBoolean(data[3]);
 
-                    // Создаем книгу
+                    // Grāmatas izveide
                     Book book = new Book(data[0], data[1], year);
                     if (isBorrowed) {
-                        book.borrowBook(); // Если книга взята, то помечаем как взятую
+                        book.borrowBook(); // Ja grāmata ir paņemta, atzīmējam kā paņemtu
                     }
-                    books.add(book); // Добавляем книгу в список
+                    books.add(book); // Grāmatas pievienošana sarakstam
                 } catch (NumberFormatException e) {
                     System.out.println("Data conversion error: " + line);
                 }
