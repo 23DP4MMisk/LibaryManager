@@ -31,6 +31,10 @@ public class CommandExecutor {
                 registerClient(scanner, clients);
                 break;
 
+            case "remove_client":
+                removeClient(clients, books, scanner);
+                break;
+
             case "count":
                 countBooks(books);
                 break;
@@ -59,7 +63,7 @@ public class CommandExecutor {
                 break;
 
             default:
-                System.out.println("Invalid command.");
+                System.out.println(ColorScheme.ERROR_COLOR + "Invalid command." + ColorScheme.ERROR_RESET);
         }
     }
 
@@ -88,7 +92,7 @@ public class CommandExecutor {
         if (book != null) {
             System.out.println(book);
         } else {
-            System.out.println("Book not found.");
+            System.out.println(ColorScheme.ERROR_COLOR + "Book not found." + ColorScheme.ERROR_RESET);
         }
     }
 
@@ -101,6 +105,27 @@ public class CommandExecutor {
         String name = scanner.nextLine();
         Client.registerClient(clients, name);
         CSVHandler.saveClientsToCSV(clients);
+    }
+
+    public static void removeClient(List<Client> clients, List<Book> books, Scanner scanner) {
+        System.out.print("Enter client name to remove: ");
+        String name = scanner.nextLine();
+    
+        Client client = Client.findClientByName(clients, name);
+        if (client == null) {
+            System.out.println(ColorScheme.ERROR_COLOR + "Client not found." + ColorScheme.ERROR_RESET);
+            return;
+        }
+    
+        // Parbaudam vai visi gramatas klients nododa biblioteka
+        if (!client.getBorrowedBook().isEmpty()) {
+            System.out.println(ColorScheme.ERROR_COLOR + "Client cannot be removed. They have borrowed books that must be returned first." + ColorScheme.ERROR_RESET);
+            return;
+        }
+    
+        clients.remove(client);
+        CSVHandler.updateClientsCSV(clients); // Apdejtojam clients.csv
+        System.out.println("Client removed successfully.");
     }
 
     private static void countBooks(List<Book> books) {
@@ -116,7 +141,7 @@ public class CommandExecutor {
         String clientName = scanner.nextLine();
         Client client = Client.findClientByName(clients, clientName);
         if (client == null) {
-            System.out.println("Client not found.");
+            System.out.println(ColorScheme.ERROR_COLOR + "Client not found." + ColorScheme.ERROR_RESET);
             return;
         }
 
@@ -127,7 +152,7 @@ public class CommandExecutor {
             client.borrowBook(book);
             CSVHandler.saveBorrowedBook(clientName, bookTitle);
         } else {
-            System.out.println("Book not found.");
+            System.out.println(ColorScheme.ERROR_COLOR + "Book not found." + ColorScheme.ERROR_RESET);
         }
     }
 
@@ -136,7 +161,12 @@ public class CommandExecutor {
         String clientName = scanner.nextLine();
         Client client = Client.findClientByName(clients, clientName);
         if (client == null) {
-            System.out.println("Client not found.");
+            System.out.println(ColorScheme.ERROR_COLOR + "Client not found." + ColorScheme.ERROR_RESET);
+            return;
+        }
+
+        if (client.getBorrowedBook().isEmpty()) {
+            System.out.println(ColorScheme.ERROR_COLOR + "This client hasn't borrowed any books." + ColorScheme.ERROR_RESET);
             return;
         }
 
@@ -148,7 +178,7 @@ public class CommandExecutor {
             CSVHandler.saveClientsToCSV(clients);
             CSVHandler.removeBorrowedBook(clientName, bookTitle);
         } else {
-            System.out.println("Book not found.");
+            System.out.println(ColorScheme.ERROR_COLOR + "Book not found." + ColorScheme.ERROR_RESET);
         }
     }
 }

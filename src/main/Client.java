@@ -34,7 +34,7 @@ public class Client {
             borrowedBooks.add(book);
             book.borrowBook();
         } else {
-            System.out.println("The book is already borrowed by another client.");
+            System.out.println(ColorScheme.ERROR_COLOR + "The book is already borrowed by another client." + ColorScheme.ERROR_RESET);
         }
     }
     
@@ -46,7 +46,7 @@ public class Client {
             borrowedBooks.remove(book);
             book.returnBook();
         } else {
-            System.out.println("You didn't borrow this book.");
+            System.out.println(ColorScheme.ERROR_COLOR + "You didn't borrow this book." + ColorScheme.ERROR_RESET);
         }
     }
 
