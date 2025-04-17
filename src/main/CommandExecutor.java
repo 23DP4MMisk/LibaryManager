@@ -38,8 +38,14 @@ public class CommandExecutor {
             case "count":
                 countBooks(books);
                 break;
-
             
+            case "filter_year":
+               filterBooksByYear(scanner, books);
+               break;
+
+            case "filter_borrow":
+               filterBooksByBorrowedStatus(scanner, books);
+               break;
 
             case "sort_asc":
                 TableFormatter.printSortedBooksTable(books, Book.sortByYearAsc);
@@ -179,6 +185,28 @@ public class CommandExecutor {
             CSVHandler.removeBorrowedBook(clientName, bookTitle);
         } else {
             System.out.println(ColorScheme.ERROR_COLOR + "Book not found." + ColorScheme.ERROR_RESET);
+        }
+    }
+
+    private static void filterBooksByYear(Scanner scanner, List<Book> books) {
+        System.out.print("Enter the year to filter by: ");
+        int year = scanner.nextInt();
+        List<Book> filteredBooks = Book.filterBooksByYear(books, year);
+        if (filteredBooks.isEmpty()) {
+            System.out.println(ColorScheme.ERROR_COLOR + "No books found for the year " + year + "." + ColorScheme.ERROR_RESET);
+        } else {
+            TableFormatter.printBooksTable(filteredBooks);  // Display filtered books in table format
+        }
+    }
+
+    private static void filterBooksByBorrowedStatus(Scanner scanner, List<Book> books) {
+        System.out.print("Enter borrowed status (true for borrowed, false for available): ");
+        boolean isBorrowed = scanner.nextBoolean();
+        List<Book> filteredBooks = Book.filterBooksByBorrowedStatus(books, isBorrowed);
+        if (filteredBooks.isEmpty()) {
+            System.out.println(ColorScheme.ERROR_COLOR + "No books found with borrowed status " + isBorrowed + "." + ColorScheme.ERROR_RESET);
+        } else {
+            TableFormatter.printBooksTable(filteredBooks);  // Display filtered books in table format
         }
     }
 }

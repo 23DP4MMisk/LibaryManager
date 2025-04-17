@@ -1,7 +1,7 @@
 package main;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 import java.util.Comparator;
 
 public class Book {
@@ -128,6 +128,19 @@ public class Book {
     public static void sortBooksByYearDesc(List<Book> books) {
         books.sort(Book.sortByYearDesc);
         listBooks(books);
+    }
+
+     public static List<Book> filterBooksByYear(List<Book> books, int year) {
+        return books.stream()
+                .filter(book -> book.getYear() == year)
+                .collect(Collectors.toList());
+    }
+
+    // Filter books by borrowed status
+    public static List<Book> filterBooksByBorrowedStatus(List<Book> books, boolean isBorrowed) {
+        return books.stream()
+                .filter(book -> book.isBorrowed() == isBorrowed)
+                .collect(Collectors.toList());
     }
 
    
