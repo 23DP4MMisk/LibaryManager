@@ -84,7 +84,7 @@ public class Book {
           CSVHandler.updateBooksCSV(books);  // Updating CSV
           System.out.println("Book \"" + title + "\" delete.");
         } else {
-          System.out.println("Book \"" + title + "\" dont found.");
+          System.out.println(ColorScheme.ERROR_COLOR + "Book \"" + title + "\" dont found." + ColorScheme.ERROR_RESET);
         }
     }
 

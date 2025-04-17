@@ -29,7 +29,7 @@ Bibliotēkas sistēmas izveide konsolei, kas ļauj pievienot, dzēst grāmatas, 
 # Lietotaja interfejsa apraksts   
 `Sākums:`   
 Pašā sākumā tiek parādīts uzraksts __LIBARY MANAGER__, kas tika izveidots, pateicoties ASCII Animation.  
-Pēc tam jūs varat redzēt 8 komandas, kuras var veikt šajā programma, un ir īss apraksts katrai komandai.   
+Pēc tam jūs varat redzēt 13 komandas, kuras var veikt šajā programma, un ir īss apraksts katrai komandai.   
 __Īss apraksts un to paskaidrojums katrai komandai:__    
 1. `ADD - Pievienot jaunu grāmatu `   
       _Kā tas darbojas:_  
@@ -234,9 +234,48 @@ _Kā tas darbojas:_
         - Izsauc `Client.registerClient(clients, name) metodi`, lai pievienotu jauno klientu sarakstam clients, izmantojot ievadīto vārdu.
    3. __Datu saglabāšana CSV failā:__  
         - Izsauc `CSVHandler.saveClientsToCSV(clients)`, lai saglabātu atjaunināto klientu sarakstu CSV failā.  
+  
+7. `REMOVE_CLIENT – Dzēst klientu`  
+    _Kā tas darbojas:_  
+    - Pieprasa lietotājam ievadīt klienta vārdu, kuru vēlas dzēst no bibliotēkas sistēmas.  
+    - Pārbauda, vai šis klients eksistē un vai viņam nav `aizņemtu grāmatu.`  
+    - Ja klients ir atrasts un visas grāmatas ir atgrieztas, klients tiek noņemts no saraksta un dati tiek atjaunināti CSV failā.  
+    __Kā ir realizēts kodā__  
+    ```  
+    public static void removeClient(List<Client> clients, List<Book> books, Scanner scanner) {
+        System.out.print("Enter client name to remove: ");
+        String name = scanner.nextLine();
+    
+        Client client = Client.findClientByName(clients, name);
+        if (client == null) {
+            System.out.println(ColorScheme.ERROR_COLOR + "Client not found." + ColorScheme.ERROR_RESET);
+            return;
+        }
+    
+        // Parbaudam vai visi gramatas klients nododa biblioteka
+        if (!client.getBorrowedBook().isEmpty()) {
+            System.out.println(ColorScheme.ERROR_COLOR + "Client cannot be removed. They have borrowed books that must be returned first." + ColorScheme.ERROR_RESET);
+            return;
+        }
+    
+        clients.remove(client);
+        CSVHandler.updateClientsCSV(clients); // Apdejtojam clients.csv
+        System.out.println("Client removed successfully.");
+    }  
+    ```  
+    __Loģika__  
+    1. __Klienta meklēšana:__  
+        - Pieprasa ievadīt klienta vārdu.  
+        - Meklē klientu sarakstā, izmantojot `metodi Client.findClientByName.`  
+        - Ja klients netiek atrasts, izvada ziņojumu `"Client not found."` un pārtrauc izpildi.  
+    2. __Aizņemto grāmatu pārbaude:__  
+        - Ja klientam ir `aizņemtas grāmatas,` viņu nevar dzēst.  
+        - Izvada brīdinājumu: `"Client cannot be removed. They have borrowed books that must be returned first."`  
+    3. __Klienta dzēšana:__  
+        - Ja klients ir atrasts un visas grāmatas ir atgrieztas, viņš tiek izņemts no saraksta.  
+        - Atjauno klientu datus `clients.csv failā` ar `CSVHandler.updateClientsCSV.`
 
-
-7. `COUNT – Skaitīt grāmatas`  
+8. `COUNT – Skaitīt grāmatas`  
     _Kā tas darbojas:_  
     - Izvada kopējo grāmatu skaitu sistēmā.  
     __Ka ir realizets koda__  
@@ -255,7 +294,7 @@ _Kā tas darbojas:_
     3. __Izvade:__  
         - Pēc tam tiek izdrukāts aizņemtās grāmatas skaits ar krāsu iestatījumiem no ColorScheme.TABLE_HEADER_COLOR un ColorScheme.TABLE_RESET.  
 
-8. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
+9. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada pieaugošā secībā.  
     __Ka ir realizets koda__  
@@ -272,7 +311,7 @@ _Kā tas darbojas:_
     2. __Grāmatu parādīšana:__  
         - Pēc grāmatu kārtošanas tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-9. `SORT_DESC – Kārtot grāmatas pēc gada (dilstošā secībā)`  
+10. `SORT_DESC – Kārtot grāmatas pēc gada (dilstošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada dilstošā secībā.  
     __Ka ir realizets koda__  
@@ -290,7 +329,7 @@ _Kā tas darbojas:_
     2. __Grāmatu parādīšana:__  
         - Pēc grāmatu kārtošanas, tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-10. `BORROW – Paņemt grāmatu no bibliotekas`   
+11. `BORROW – Paņemt grāmatu no bibliotekas`   
     _Kā tas darbojas:_  
     - Pieprasa lietotājam ievadīt grāmatas nosaukumu, kuru viņš vēlas aizņemt.  
     - Atzīmē grāmatu kā aizņemtu.  
@@ -327,49 +366,57 @@ _Kā tas darbojas:_
         - Ja gan klients, gan grāmata ir atrasti, programma atzīmē grāmatu kā aizņemtu, izmantojot `klienta metodi borrowBook`, un veic atjauninājumus:  
         - Grāmatas aizņemšanas informācija tiek saglabāta ar `CSVHandler.saveBorrowedBook`.  
 
-11. `RETURN – Atgriezt aizņemto grāmatu`  
+12. `RETURN – Atgriezt aizņemto grāmatu`  
     _Kā tas darbojas:_  
-    - Pieprasa ievadit klientu vardu kurš aizņem gramatu un grīb atgriezt gramatu biblioteka
+    - Pieprasa ievadit klientu vardu kurš aizņem gramatu un grīb atgriezt gramatu biblioteka  
+    - Ja klients eksistē un viņam ir aizņemtas grāmatas, tiek pieprasīts ievadīt grāmatas nosaukumu.
     - Pieprasa lietotājam ievadīt grāmatas nosaukumu, kuru viņš vēlas atgriezt.  
     - Atzīmē grāmatu kā pieejamu.  
     __Ka ir realizets koda__  
     ```  
     private static void returnBook(Scanner scanner, List<Book> books, List<Client> clients) {
-        System.out.print("Enter client name: ");
-        String clientName = scanner.nextLine();
-        Client client = Client.findClientByName(clients, clientName);
-        if (client == null) {
-            System.out.println("Client not found.");
-            return;
-        }
+    System.out.print("Enter client name: ");
+    String clientName = scanner.nextLine();
+    Client client = Client.findClientByName(clients, clientName);
+    if (client == null) {
+        System.out.println(ColorScheme.ERROR_COLOR + "Client not found." + ColorScheme.ERROR_RESET);
+        return;
+    }
 
-        System.out.print("Enter book title to return: ");
-        String bookTitle = scanner.nextLine();
-        Book book = Book.findBookByTitle(books, bookTitle);
-        if (book != null) {
-            client.returnBook(book);
-            CSVHandler.saveClientsToCSV(clients);
-            CSVHandler.removeBorrowedBook(clientName, bookTitle);
-        } else {
-            System.out.println("Book not found.");
-        }
+    if (client.getBorrowedBook().isEmpty()) {
+        System.out.println(ColorScheme.ERROR_COLOR + "This client hasn't borrowed any books." + ColorScheme.ERROR_RESET);
+        return;
+    }
+
+    System.out.print("Enter book title to return: ");
+    String bookTitle = scanner.nextLine();
+    Book book = Book.findBookByTitle(books, bookTitle);
+    if (book != null) {
+        client.returnBook(book);
+        CSVHandler.saveClientsToCSV(clients);
+        CSVHandler.removeBorrowedBook(clientName, bookTitle);
+    } else {
+        System.out.println(ColorScheme.ERROR_COLOR + "Book not found." + ColorScheme.ERROR_RESET);
+    }
     }
     ```  
     __Loģika__  
     1. __Klienta meklēšana:__  
         - Pieprasa ievadīt klienta vārdu.  
         - Meklē klientu sarakstā, izmantojot `metodi Client.findClientByName.`  
-        - Ja klients netiek atrasts, izvada ziņojumu "Client not found." un iznāk no metodes.
-    2. __Grāmatas meklēšana:__  
+        - Ja klients netiek atrasts, izvada ziņojumu "Client not found." un iznāk no metodes.  
+    2. __Pārbaude: vai klients ir aizņēmies kādu grāmatu:__  
+        - Ja klientam nav nevienas aizņemtas grāmatas `(client.getBorrowedBook().isEmpty()),` izvada kļūdas ziņojumu `This client hasn't borrowed any books.` un pārtrauc darbību.
+    3. __Grāmatas meklēšana:__  
         - Pieprasa ievadīt grāmatas nosaukumu.  
         - Meklē grāmatu sarakstā, izmantojot `metodi Book.findBookByTitle.`  
         - Ja grāmata netiek atrasta, izvada ziņojumu "Book not found."  
-    3. __Grāmatas atgriešana:__  
+    4. __Grāmatas atgriešana:__  
         - Ja gan klients, gan grāmata ir atrasti, tiek izsaukta `klienta metode returnBook`, kas veic grāmatas atgriešanu.  
         - Saglabā atjaunoto klientu datus CSV failā, izmantojot `CSVHandler.saveClientsToCSV`.  
         - Noņem aizņemto grāmatu no klienta saraksta, izmantojot `CSVHandler.removeBorrowedBook`.  
 
-12. `EXIT – Iziet no programmas`  
+13. `EXIT – Iziet no programmas`  
 
     _Kā tas darbojas:_  
     - Iziet no programmas.  
@@ -412,6 +459,19 @@ _Kā tas darbojas:_
 `LIST – grāmatu saraksta attēlošana ||      
 list_client – klientu saraksta attēlošana  
 -> Dati tiek parādīti tabulas formātā.`  
+
+`REGISTER – jauna klienta reģistrācija`  
+- Ievadiet klienta vārdu.  
+- Ja klients ar tādu vārdu neeksistē, tas tiek pievienots sarakstam.
+- Parādās ziņojums: _Client registered successfully._  
+- Ja klients jau eksistē, tiek parādīts ziņojums: _Client already exists._  
+
+`REMOVE_CLIENT – klienta dzēšana`  
+- Ievadiet klienta vārdu, kuru vēlaties izdzēst.  
+- Ja klientam __nav aizņemtu grāmatu,__ viņš tiek dzēsts no saraksta.  
+- Ja dzēšana veiksmīga, parādās ziņojums: _Client "Vārds" removed successfully._  
+- Ja klientam ir grāmatas, parādās ziņojums: _Client cannot be removed. They have borrowed books that must be returned first._  
+- Ja klients nav atrasts, tiek parādīts: _Client not found._
 
 ` COUNT ` – parāda kopējo grāmatu skaitu bibliotēkā.  
   

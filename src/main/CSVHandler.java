@@ -74,6 +74,17 @@ public class CSVHandler {
         }
     }
 
+    public static void updateClientsCSV(List<Client> clients) {
+        try (BufferedWriter writer = Helper.getWriter(CLIENTS_FILE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
+            for (Client client : clients) {
+                writer.write(client.getName());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error updating clients.csv: " + e.getMessage());
+        }
+    }
+
     // Klientu saglabāšana CSV formātā
     public static void saveClientsToCSV(List<Client> clients) {
         try (BufferedWriter writer = Helper.getWriter(CLIENTS_FILE, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
@@ -148,7 +159,4 @@ public class CSVHandler {
     return borrowedBooks;
 }
 
-   
-
-    
 }
