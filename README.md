@@ -294,9 +294,84 @@ _Kā tas darbojas:_
     3. __Izvade:__  
         - Pēc tam tiek izdrukāts aizņemtās grāmatas skaits ar krāsu iestatījumiem no ColorScheme.TABLE_HEADER_COLOR un ColorScheme.TABLE_RESET.  
 
+9.  `FILTER_YEAR – Filtrēt grāmatas pēc gada`  
+    _Kā tas darbojas:_
+    - Prasa no lietotāja gadu (piemēram, “2021”), pārbauda, vai tas ir ievadīts pareizi (četri cipari), un tad izvada tikai tās grāmatas, kas publicētas šajā gadā.  
+    __Ka ir realizets koda__    
+      
+    ```  
+    private static void filterBooksByYear(Scanner scanner, List<Book> books) {
+    System.out.print("Enter the year to filter by: ");
+    String input = scanner.nextLine();
+
+    // Regulārā izteiksme pārbauda, vai lietotājs ievadījis 4 ciparus
+    if (!input.matches("\\d{4}")) {
+        System.out.println(ColorScheme.ERROR_COLOR + "Invalid year format. Please enter a 4-digit year." + ColorScheme.ERROR_RESET);
+        return;
+    }
+
+    int year = Integer.parseInt(input); // konvertējam droši, jo pārbaudīts
+
+    List<Book> filteredBooks = Book.filterBooksByYear(books, year);
+    if (filteredBooks.isEmpty()) {
+        System.out.println(ColorScheme.ERROR_COLOR + "No books found for the year " + year + "." + ColorScheme.ERROR_RESET);
+    } else {
+        TableFormatter.printBooksTable(filteredBooks);
+    }
+    }  
+    ```  
+    __Loģika__  
+    1. __Ievades apstrāde:__  
+        - Lietotājs ievada gadu kā tekstu `(scanner.nextLine())`.  
+        - Ar regulāro izteiksmi `\\d{4}` pārbauda, vai tas satur tieši četri cipari (piemēram, "2023").  
+    2. __Pārveidošana un filtrēšana:__  
+        - Pēc pārbaudes gads tiek pārvērsts uz `int`.  
+        - Metode `Book.filterBooksByYear(books, year)` atgriež sarakstu ar atbilstošajām grāmatām.  
+    3. __Izvade:__  
+        - Ja saraksts ir tukšs, lietotājs tiek informēts ar kļūdas paziņojumu.  
+        - Ja ir rezultāti, tie tiek attēloti tabulas veidā ar `TableFormatter.printBooksTable(filteredBooks)`.  
+          
+10. `FILTER_BORROWED – Filtrēt grāmatas pēc aizņemtības statusa`  
+    _Kā tas darbojas:_  
+    - Prasa no lietotāja ievadīt statusu (true – ja grāmata ir aizņemta, false – ja pieejama), un pēc tam izvada sarakstu ar atbilstošajām grāmatām.  
+    __Ka ir realizets koda__    
+    ``` 
+    private static void filterBooksByBorrowedStatus(Scanner scanner, List<Book> books) {
+    System.out.print("Enter borrowed status (true for borrowed, false for available): ");
+    
+    boolean isBorrowed;
+    try {
+        isBorrowed = Boolean.parseBoolean(scanner.nextLine().trim().toLowerCase());
+    } catch (Exception e) {
+        System.out.println(ColorScheme.ERROR_COLOR + "Invalid input. Please enter 'true' or 'false'." + ColorScheme.ERROR_RESET);
+        return;
+    }
+
+    List<Book> filteredBooks = Book.filterBooksByBorrowedStatus(books, isBorrowed);
+    if (filteredBooks.isEmpty()) {
+        System.out.println(ColorScheme.ERROR_COLOR + "No books found with borrowed status " + isBorrowed + "." + ColorScheme.ERROR_RESET);
+    } else {
+        TableFormatter.printBooksTable(filteredBooks);
+    }
+    }  
+    ```  
+    __Loģika__  
+    1. __Ievades apstrāde:__  
+        - Lietotājs ievada tekstu (`true` vai `false`).  
+        - Ar `Boolean.parseBoolean`(...) pārveido tekstu uz boolean (`true` vai `false`).  
+        - Tiek izmantots `.trim().toLowerCase()` lai padarītu ievadi elastīgāku (piemēram, "True", "TRUE", " true " u.c.).  
+    2. Filtrēšana:  
+        - Metode `Book.filterBooksByBorrowedStatus(books, isBorrowed)` atgriež tikai tās grāmatas, kuras atbilst izvēlētajam statusam.   
+    3. __Izvade:__  
+        - Ja neatrod nevienu grāmatu ar šādu statusu, parādās paziņojums ar kļūdas krāsu.  
+        - Ja grāmatas atrastas – tās tiek izvadītas tabulas formā ar `TableFormatter.printBooksTable(filteredBooks)`.  
+
+
+    
+
   
 
-9. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
+11. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada pieaugošā secībā.  
     __Ka ir realizets koda__  
@@ -313,7 +388,7 @@ _Kā tas darbojas:_
     2. __Grāmatu parādīšana:__  
         - Pēc grāmatu kārtošanas tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-10. `SORT_DESC – Kārtot grāmatas pēc gada (dilstošā secībā)`  
+12. `SORT_DESC – Kārtot grāmatas pēc gada (dilstošā secībā)`  
     _Kā tas darbojas:_  
     - Kārto grāmatas sarakstu pēc izdošanas gada dilstošā secībā.  
     __Ka ir realizets koda__  
@@ -331,7 +406,7 @@ _Kā tas darbojas:_
     2. __Grāmatu parādīšana:__  
         - Pēc grāmatu kārtošanas, tiek izsaukta `listBooks(books) metode`, lai izvadītu sarakstu ar kārtotajām grāmatām uz ekrāna.  
 
-11. `BORROW – Paņemt grāmatu no bibliotekas`   
+13. `BORROW – Paņemt grāmatu no bibliotekas`   
     _Kā tas darbojas:_  
     - Pieprasa lietotājam ievadīt grāmatas nosaukumu, kuru viņš vēlas aizņemt.  
     - Atzīmē grāmatu kā aizņemtu.  
@@ -368,7 +443,7 @@ _Kā tas darbojas:_
         - Ja gan klients, gan grāmata ir atrasti, programma atzīmē grāmatu kā aizņemtu, izmantojot `klienta metodi borrowBook`, un veic atjauninājumus:  
         - Grāmatas aizņemšanas informācija tiek saglabāta ar `CSVHandler.saveBorrowedBook`.  
 
-12. `RETURN – Atgriezt aizņemto grāmatu`  
+14. `RETURN – Atgriezt aizņemto grāmatu`  
     _Kā tas darbojas:_  
     - Pieprasa ievadit klientu vardu kurš aizņem gramatu un grīb atgriezt gramatu biblioteka  
     - Ja klients eksistē un viņam ir aizņemtas grāmatas, tiek pieprasīts ievadīt grāmatas nosaukumu.
@@ -418,7 +493,7 @@ _Kā tas darbojas:_
         - Saglabā atjaunoto klientu datus CSV failā, izmantojot `CSVHandler.saveClientsToCSV`.  
         - Noņem aizņemto grāmatu no klienta saraksta, izmantojot `CSVHandler.removeBorrowedBook`.  
 
-13. `EXIT – Iziet no programmas`  
+15. `EXIT – Iziet no programmas`  
 
     _Kā tas darbojas:_  
     - Iziet no programmas.  

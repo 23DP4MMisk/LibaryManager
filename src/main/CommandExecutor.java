@@ -205,8 +205,16 @@ public class CommandExecutor {
 
     private static void filterBooksByYear(Scanner scanner, List<Book> books) {
         System.out.print("Enter the year to filter by: ");
-        int year = scanner.nextInt();
-        scanner.nextLine(); 
+        String input = scanner.nextLine();
+         
+
+        if (!input.matches("\\d{4}")) {
+            System.out.println(ColorScheme.ERROR_COLOR + "Invalid year format. Please enter a 4-digit year." + ColorScheme.ERROR_RESET);
+            return;
+        }
+    
+        int year = Integer.parseInt(input); 
+        
         List<Book> filteredBooks = Book.filterBooksByYear(books, year);
         if (filteredBooks.isEmpty()) {
             System.out.println(ColorScheme.ERROR_COLOR + "No books found for the year " + year + "." + ColorScheme.ERROR_RESET);
