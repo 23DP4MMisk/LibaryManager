@@ -78,9 +78,24 @@ public class CommandExecutor {
         String title = scanner.nextLine();
         System.out.print("Enter author: ");
         String author = scanner.nextLine();
-        System.out.print("Enter year: ");
-        int year = scanner.nextInt();
-        scanner.nextLine();
+
+        String yearInput;
+        int year = 0;
+        boolean valid = false;
+
+        while (!valid) {
+        System.out.print("Enter year (e.g., 2023): ");
+        yearInput = scanner.nextLine();
+        
+        
+        if (yearInput.matches("[0-9]{4}")) {
+            year = Integer.parseInt(yearInput);
+            valid = true;
+        } else {
+            System.out.println(ColorScheme.ERROR_COLOR + "Invalid year format. Please enter a 4-digit number." + ColorScheme.ERROR_RESET);
+        }
+      }
+       
         Book.addBook(books, title, author, year);
         CSVHandler.saveBooksToCSV(books);
     }
@@ -191,6 +206,7 @@ public class CommandExecutor {
     private static void filterBooksByYear(Scanner scanner, List<Book> books) {
         System.out.print("Enter the year to filter by: ");
         int year = scanner.nextInt();
+        scanner.nextLine(); 
         List<Book> filteredBooks = Book.filterBooksByYear(books, year);
         if (filteredBooks.isEmpty()) {
             System.out.println(ColorScheme.ERROR_COLOR + "No books found for the year " + year + "." + ColorScheme.ERROR_RESET);
@@ -202,6 +218,7 @@ public class CommandExecutor {
     private static void filterBooksByBorrowedStatus(Scanner scanner, List<Book> books) {
         System.out.print("Enter borrowed status (true for borrowed, false for available): ");
         boolean isBorrowed = scanner.nextBoolean();
+        scanner.nextLine(); 
         List<Book> filteredBooks = Book.filterBooksByBorrowedStatus(books, isBorrowed);
         if (filteredBooks.isEmpty()) {
             System.out.println(ColorScheme.ERROR_COLOR + "No books found with borrowed status " + isBorrowed + "." + ColorScheme.ERROR_RESET);

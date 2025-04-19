@@ -21,18 +21,16 @@ public class LibaryManager {
         List<Book> books = InitialDataLoader.getBooks();
         List<Client> clients = InitialDataLoader.getClients();
 
-       
-
-        ASCIIAnimation.printWelcomeMessage();
+       ASCIIAnimation.printWelcomeMessage();
+       CommandPrinter.printCommands();
 
         while (true) {
-            System.out.println("\nAvailable commands:");
-            CommandPrinter.printCommands();
-
             System.out.print("\n" + ColorScheme.COMMAND_COLOR + " Enter command: " + ColorScheme.RESET + " ");
             String command = scanner.nextLine().trim().toLowerCase();
 
             CommandExecutor.executeCommand(command, scanner, books, clients);
+
+            CommandHintBar.printCommandHintBar(); 
         }
     }
 }

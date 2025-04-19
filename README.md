@@ -29,7 +29,7 @@ Bibliotēkas sistēmas izveide konsolei, kas ļauj pievienot, dzēst grāmatas, 
 # Lietotaja interfejsa apraksts   
 `Sākums:`   
 Pašā sākumā tiek parādīts uzraksts __LIBARY MANAGER__, kas tika izveidots, pateicoties ASCII Animation.  
-Pēc tam jūs varat redzēt 13 komandas, kuras var veikt šajā programma, un ir īss apraksts katrai komandai.   
+Pēc tam jūs varat redzēt 15 komandas, kuras var veikt šajā programma, un ir īss apraksts katrai komandai.   
 __Īss apraksts un to paskaidrojums katrai komandai:__    
 1. `ADD - Pievienot jaunu grāmatu `   
       _Kā tas darbojas:_  
@@ -293,6 +293,8 @@ _Kā tas darbojas:_
         - Ar `count()` tiek saskaitītas grāmatas, kas atbilst filtrēšanas kritērijiem (tās, kas ir aizņemtas).  
     3. __Izvade:__  
         - Pēc tam tiek izdrukāts aizņemtās grāmatas skaits ar krāsu iestatījumiem no ColorScheme.TABLE_HEADER_COLOR un ColorScheme.TABLE_RESET.  
+
+  
 
 9. `SORT_ASC – Kārtot grāmatas pēc gada (pieaugošā secībā)`  
     _Kā tas darbojas:_  
