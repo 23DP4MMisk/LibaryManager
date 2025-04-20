@@ -551,6 +551,16 @@ list_client – klientu saraksta attēlošana
 - Ja klients nav atrasts, tiek parādīts: _Client not found._
 
 ` COUNT ` – parāda kopējo grāmatu skaitu bibliotēkā.  
+
+`FILTER_BORROWED ` - filtrēšana pēc aizņemšanas statusa  
+   - Ievadiet `true`, lai redzētu aizņemtās grāmatas, vai `false`, lai redzētu pieejamās.  
+   - Tiek parādītas visas grāmatas ar izvēlēto statusu.  
+   - Ja grāmatu nav, tiek parādīts atbilstošs paziņojums.  
+
+`FILTER_YEAR` – filtrēšana pēc izdošanas gada  
+   - Ievadiet 4 ciparu gadu (piemēram, 2020).  
+   - Tiek parādītas visas grāmatas, kas izdotas norādītajā gadā.  
+   - Ja grāmatu nav, tiek parādīts atbilstošs paziņojums. 
   
 `SORT_ASC / SORT_DESC` – grāmatu kārtošana pēc izdošanas gada  
    - __sort_asc__ – no vecākās līdz jaunākajai.  
