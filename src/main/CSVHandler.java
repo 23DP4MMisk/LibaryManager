@@ -45,7 +45,7 @@ public class CSVHandler {
                     // Grāmatas izveide
                     Book book = new Book(data[0], data[1], year);
                     if (isBorrowed) {
-                        book.borrowBook(); // Ja grāmata ir paņemta, atzīmējam kā paņemtu
+                        book.borrowSilently(); // Ja grāmata ir paņemta, atzīmējam kā paņemtu
                     }
                     books.add(book); // Grāmatas pievienošana sarakstam
                 } catch (NumberFormatException e) {
