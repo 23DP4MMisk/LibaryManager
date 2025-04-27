@@ -130,7 +130,7 @@ public class Book {
         listBooks(books);
     }
 
-     public static List<Book> filterBooksByYear(List<Book> books, int year) {
+    public static List<Book> filterBooksByYear(List<Book> books, int year) {
         return books.stream()
                 .filter(book -> book.getYear() == year)
                 .collect(Collectors.toList());
