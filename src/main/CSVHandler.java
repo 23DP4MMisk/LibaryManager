@@ -45,7 +45,7 @@ public class CSVHandler {
                     // Grāmatas izveide
                     Book book = new Book(data[0], data[1], year);
                     if (isBorrowed) {
-                        book.borrowBook(); // Ja grāmata ir paņemta, atzīmējam kā paņemtu
+                        book.borrowSilently(); // Ja grāmata ir paņemta, atzīmējam kā paņemtu
                     }
                     books.add(book); // Grāmatas pievienošana sarakstam
                 } catch (NumberFormatException e) {
@@ -144,19 +144,19 @@ public class CSVHandler {
     }
 
     public static Map<String, List<String>> loadBorrowedBooks() {
-    Map<String, List<String>> borrowedBooks = new HashMap<>();
+    Map<String, List<String>> borrowedBooks = new HashMap<>(); //  Izveido tukšu karti, kur glabāsies klientu vārdus kā atslēgas un to aizņemtās grāmatas kā vērtības sarakstus
     try (BufferedReader reader = new BufferedReader(new FileReader(BORROWED_BOOKS_FILE))) {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            if (data.length == 2) {
-                borrowedBooks.computeIfAbsent(data[0], k -> new ArrayList<>()).add(data[1]);
+            if (data.length == 2) { // // Pārbauda, vai ir tieši 2 dati (klients un grāmata)
+                borrowedBooks.computeIfAbsent(data[0], k -> new ArrayList<>()).add(data[1]); //  Ja kartē vēl nav klienta vārda, izveido jaunu sarakstu un pievieno grāmatu šim klientam
             }
         }
     } catch (IOException e) {
         System.out.println("Error reading borrowed_books.csv: " + e.getMessage());
     }
-    return borrowedBooks;
-}
+    return borrowedBooks; // Atgriež mapes ar klientiem un to aizņemtajām grāmatām
+    }
 
 }

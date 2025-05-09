@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "LibaryManager",
+            "request": "launch",
+            "mainClass": "main.LibaryManager",
+            "projectName": "LibaryManager-2_91ea2201"
+        }
+    ]
+}
